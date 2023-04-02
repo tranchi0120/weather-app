@@ -7,25 +7,6 @@ import Iconwind from "../src/icons/wind.png";
 import Iconhumidity from "../src/icons/humidity.png";
 import Iconfeel from "../src/icons/feels.png";
 
-// import {
-//   IoMdSunny,
-//   IoMdRainy,
-//   IoMdCloudy,
-//   IoMdSnow,
-//   IoMdThunderstorm,
-//   IoMdSearch,
-// } from "react-icons/io";
-
-// import {
-//   BsCloudHaze2Fill,
-//   BsCloudDrizzleFill,
-//   BsEye,
-//   BsWater,
-//   BsThermometer,
-//   BsWind,
-// } from "react-icons/bs";
-
-// import { TbTemperatureCelsius } from "react-icons/tb";
 import { ImSpinner8 } from "react-icons/im";
 
 function App() {
@@ -40,15 +21,17 @@ function App() {
   const iconUrl = "https://openweathermap.org/img/wn/";
 
   useEffect(() => {
+
     const ApiKey = "86168b944d06402d6f17376d766b21b3";
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang={vi}&appid=${ApiKey}`;
 
-    setLoading(true);
 
+    setLoading(true);
     axios
       .get(url)
       .then((res) => {
         // set the data after 1500 ms
+
         setTimeout(() => {
           setDatas(res.data);
           // set loading to false
@@ -102,17 +85,20 @@ function App() {
   };
 
   const date = new Date();
+  console.log(date);
+
 
   return (
     <div className="weather w-full h-screen ">
       <form>
         {errorMsg && (
-          <div className={` ${errorMsg ? 'active-err' : 'error'} error w-full max-w-[90vw] lg:max-w-[450px] bg-[#ff2032] text-white absolute top-2 lg:top-10 p-4 capitalize rounded-md`}>
+          <div
+            className={` ${errorMsg ? "active-err" : "error"
+              } error w-full max-w-[90vw] lg:max-w-[450px] bg-[#ff2032] text-white absolute top-2 lg:top-10 p-4 capitalize rounded-md`}
+          >
             {`${errorMsg.response.data.message}`}
           </div>
         )}
-
-
 
         <div className={` ${animate ? "animate-shake" : "animate-none"}  `}>
           <div className="weather-wrapper">
@@ -157,7 +143,7 @@ function App() {
                       </div>
                     </div>
                     <div className="weather-between">
-                      <h1 className="weather-between__temperature">18°C</h1>
+                      <h1 className="weather-between__temperature">{Math.floor(datas.main.temp)}°C</h1>
                       <p className="weather-between__status">
                         {datas.weather[0].main}
                       </p>
@@ -168,14 +154,14 @@ function App() {
                           <img alt="#!" src={Iconvisibility} />
                           <div className="weather-bottom__text">
                             visibility
-                            <span className="weather-bottom__name">10km</span>
+                            <span className="weather-bottom__name">{datas.visibility / 1000}km</span>
                           </div>
                         </div>
                         <div className="weather-bottom__box">
                           <img alt="#!" src={Iconwind} />
                           <div className="weather-bottom__text">
                             Wind
-                            <span className="weather-bottom__name">2.8m/s</span>
+                            <span className="weather-bottom__name">{datas.wind.speed}m/s</span>
                           </div>
                         </div>
                         <div className="weather-bottom__box">
@@ -211,4 +197,4 @@ function App() {
 
 export default App;
 
-// <ImSpinner8 className="text-5xl animate-spin text-white" />
+

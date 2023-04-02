@@ -28,12 +28,13 @@
   color: #ffffff;
 
   .error {
-    transform: translateY(-200%);
+    transform: translateY(-100%);
     transition: 0.3s all;
   }
   .active-err {
-    transform: translateY(0);
+    transform: translateY(-20px);
     transition: 0.3s all inherit;
+    margin-bottom: 20px;
   }
 
   &-container {
